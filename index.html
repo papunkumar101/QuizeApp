@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <title>Quize APP</title>
+    <style>
+   #body{
+      margin: 0;
+      padding: 0;
+       background-color:lightgray ;
+       font-family: Sans-Serif;
+    }
+      h1{
+        text-align: center;
+        text-shadow: 2px 2px white;
+      }
+      h4{
+        font-weight: bold;
+      }
+      span{
+        padding-left: 50px;
+      }
+      #btn{
+        background-color: green;
+        border: none;
+        padding: 5px;
+        border-radius:20px ;
+        width: 25vw;
+      }
+      #btndv{
+        text-align: center;
+        padding: 10px;
+      }
+      
+    </style>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  </head>
+  <body id="body">
+    Dark-mood Available : <select onchange="mode(this.value)">
+       <option value="lightgray">Default</option>
+       <option value="black">Dark</option>
+    </select>
+    <div class="container">
+    <h1 id="heading">Quize Application</h1>
+    <h4 id="scr">score:<span id="score" style="color:green"></span>
+    
+    <small id="dt"  style="float:right">Date:13/10/2020</small></h4><hr><br>
+    
+      
+    <form name="frm" onsubmit="return myfun()">
+      <h3 id="qes1">Q1.what is your name?</h3>
+      <input type="radio" name="q1" value="a" id="qa">gulu
+      <input type="radio" name="q1" value="b" id="qb">thulu
+      <input type="radio" name="q1" value="c" id="qc">lulu
+      <input type="radio" name="q1" value="d" id="qd">none<br><br>
+      
+      <h3 id="qes2">Q2.what is your nike-name?</h3>
+      <input type="radio" name="q2" value="a" id="qa">gulu
+      <input type="radio" name="q2" value="b" id="qb">thulu
+      <input type="radio" name="q2" value="c" id="qc">lulu
+      <input type="radio" name="q2" value="d" id="qd">none<br><br>
+      
+      <h3 id="qes3">Q3.what is your age?</h3>
+      <input type="radio" name="q3" value="a" id="qa">90
+      <input type="radio" name="q3" value="b" id="qb">45
+      <input type="radio" name="q3" value="c" id="qc">68
+      <input type="radio" name="q3" value="d" id="qd">none<br><br>
+      
+     <h3 id="qes4"> Q4.what is your fav-color?</h3>
+      <input type="radio" name="q4" value="a" id="qa">lal
+      <input type="radio" name="q4" value="b" id="qb">kala
+      <input type="radio" name="q4" value="c" id="qc">dhala
+      <input type="radio" name="q4" value="d" id="qd">none<br><br>
+      
+      <h3 id="qes5">Q5.how is your day ?</h3>
+      <input type="radio" name="q5" value="a" id="qa">nice
+      <input type="radio" name="q5" value="b" id="qb">good
+      <input type="radio" name="q5" value="c" id="qc">bad
+      <input type="radio" name="q5" value="d" id="qd">none<br><hr><br>
+      
+      <div id="btndv">
+      <button type="submit" id="btn" >Submit </button>
+      </div>
+    </form>
+    </div>
+    
+    <script>
+   
+    function myfun(){
+    var total=5;
+    var result=0; // for temp.
+    
+    //get form values
+    var a1=document.forms['frm']['q1'].value;
+    var a2=document.forms['frm']['q2'].value;
+    var a3=document.forms['frm']['q3'].value;
+    var a4=document.forms['frm']['q4'].value;
+    var a5=document.forms['frm']['q5'].value;
+   var score=document.getElementById("score");
+   
+    //validation for null input
+    for(i=1;i<=total;i++){
+      if(eval('a'+i)==null || eval('a'+i)==""){
+        //alert("you leave the question No"+i);
+         swal("you leave the question No-"+i, "please fill it", "warning");
+        return false;
+      }
+    }
+
+    //set answer here
+    const ans=['d','c','a','b','d'];
+    
+    //auto cheking part
+    for(i=1;i<=total;i++){
+      if(eval('a'+i) == ans[i-1]){
+        result++
+      }
+    }
+    //alert("your total mark is :"+result);
+    swal("your score is : "+result, "congratulation", "success" , {
+  button: "Aww yiss!",
+});
+    score.innerHTML=result;
+    return false;
+    
+    }
+    
+    //dark mode
+    var h1= document.getElementById("heading");
+    var qes1=document.getElementById("qes1");
+    var qes2=document.getElementById("qes2");
+    var qes3=document.getElementById("qes3");
+    var qes4=document.getElementById("qes4");
+    var qes5=document.getElementById("qes5");
+     var scr=document.getElementById("scr");
+    var body=document.getElementById("body");
+    
+    function mode(color){
+     body.style.background=color; 
+    var c=color;
+     if(c=="black"){
+        qes1.style.color="white";
+        qes2.style.color="white";
+        qes3.style.color="white";
+        qes4.style.color="white";
+        qes5.style.color="white";
+        h1.style.color="white";
+        scr.style.color="white";
+     }
+      if(c=="lightgray"){
+        qes1.style.color="black";
+        qes2.style.color="black";
+        qes3.style.color="black";
+        qes4.style.color="black";
+        qes5.style.color="black";
+        h1.style.color="black";
+        scr.style.color="black";
+     }
+    }
+    
+    //Date
+    var dt=   new Date();
+    var dtt=document.getElementById("dt");
+    dtt.innerHTML=dt;
+    </script>
+  </body>
+</html>
